@@ -2,7 +2,7 @@ import boto3
 
 s3=boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('Y O U R   T A B L E   N A M E')
+table = dynamodb.Table('csv_demo')
 
 def lambda_handler(event, context):
     bucket_name = event["Records"][0]["s3"]["bucket"]["name"]
@@ -22,7 +22,7 @@ def lambda_handler(event, context):
             table.put_item(Item={
             "student_id" :a[0],
             "name" : a[1],
-            "age" :a[2],
-            "number" :a[3]
+            "age" :int(a[2]),
+            "marks_avg" :int(a[3])
             })
         
